@@ -30,7 +30,7 @@ class Head
 	var $packs 						= array();						//Packages to include
 	var $packages					= array();						//Packages
 		
-	var $doctype					= 'xhtml1-strict';				//Doctype
+	var $doctype					= 'xhtml1-strict';				//Default Doctype
 	var $xml_doctypes 				= array('xhtml11',				//Doctypes that require some special XHTML love
 											'xhtml1-strict',
 											'xhtml1-trans',
@@ -55,6 +55,8 @@ class Head
 	
 	var $use_favicon				= TRUE;							//Should we use the favicon?
 	var $favicon_location 			= "images/favicon.ico"; 		//Location of the favicon if we're using it
+	
+	var $ga_tracking_id				= '';							//Google Analytics Tracking Code
 	
 	var $css						= array();
 	var $js							= array();
@@ -179,6 +181,8 @@ class Head
 		
 		$html .= $this->render_title();
 		
+		$html .= $this->render_ga();
+		
 		$html .= '</head>'.$this->bump();
 		
 		//Debug
@@ -273,6 +277,36 @@ class Head
 		}
 		
 		return $out.= $this->title.'</title>'.$this->bump();
+	}
+	
+	/**
+	 * Render Google Analytics tracking code
+	 *
+	 * @return 	string
+	 */
+	function render_ga()
+	{
+		if( $this->ga_tracking_id != '' )
+		{
+			return '
+			
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push([\'_setAccount\', \''.$this->ga_tracking_id.'\']);
+  _gaq.push([\'_trackPageview\']);
+
+  (function() {
+    var ga = document.createElement(\'script\'); ga.type = \'text/javascript\'; ga.async = true;
+    ga.src = (\'https:\' == document.location.protocol ? \'https://ssl\' : \'http://www\') + \'.google-analytics.com/ga.js\';
+    var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>				
+			';
+		}
+		
+		return null;
 	}
 	
 	/**
