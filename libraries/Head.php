@@ -19,6 +19,7 @@
 
 class Head
 {
+	var $close_head					= TRUE;							//Should we use the closing </head> tag?
 	var $show_errors 				= TRUE;							//Should we throw a hissy fit?
 	var $debug						= FALSE;						//Should we debug?
 	var $output_string				= FALSE;						//Should we output this to a string? If not, then we'll use a constant
@@ -183,7 +184,10 @@ class Head
 		
 		$html .= $this->render_ga();
 		
-		$html .= '</head>'.$this->bump();
+		if( $this->close_head )
+		{
+			$html .= '</head>'.$this->bump();
+		}
 		
 		//Debug
 		if($this->debug == TRUE)
