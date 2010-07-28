@@ -1,0 +1,481 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Head Library v1.0</title>
+
+<style type='text/css' media='all'>@import url('style.css');</style>
+
+<meta http-equiv='expires' content='-1' />
+<meta http-equiv= 'pragma' content='no-cache' />
+<meta name='robots' content='all' />
+
+</head>
+<body>
+
+<!-- START NAVIGATION -->
+<div id="nav"><div id="nav_inner"></div></div>
+<div id="nav2"><a name="top">&nbsp;</a></div>
+<div id="masthead">
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td><h1>CodeIgniter Head Library</h1></td>
+</tr>
+</table>
+</div>
+<!-- END NAVIGATION -->
+
+
+<!-- START BREADCRUMB -->
+<table cellpadding="0" cellspacing="0" border="0" style="width:100%">
+<tr>
+<td id="breadcrumb">
+
+	CodeIgniter Head Library
+
+</td>
+<td></td>
+</tr>
+</table>
+<!-- END BREADCRUMB -->
+
+<br clear="all" />
+
+
+<!-- START CONTENT -->
+<div id="content">
+
+<h1>Head Library v1.0</h1>
+
+<p>The head library has one purpose: to create a valid head area for an HTML document. It renders everything from the doctype to the opening body tag, and allows you to do it with as little clutter as possible from your controllers.</p>
+
+<ul>
+	<li><a href="#download">Download</a></li>
+	<li><a href="#usage">Usage</a></li>
+	<li><a href="#config">Configuration</a></li>
+	<li><a href="#doctype">Doctypes</a></li>
+	<li><a href="#base">Base URLs</a></li>
+	<li><a href="#favicon">Favicon</a></li>
+	<li><a href="#meta">Meta Data</a></li>
+	<li><a href="#links">CSS and Javascript</a></li>
+	<li><a href="#jquery">JQuery</a></li>
+	<li><a href="#misc">Misc Code</a></li>
+	<li><a href="#packages">Packages</a></li>
+	<li><a href="#feeds">Feeds</a></li>
+	<li><a href="#debug">Debugging</a></li>
+	<li><a href="#version">Version History</a></li>
+</ul>
+
+<h2 id="usage">Download</h2>
+
+<p>You can download the Head Library at its <a href="http://github.com/adamfairholm/CodeIgniter-Head-Library">GitHub page</a>. A sample config file is also included.</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>The head library should be auto-loaded and can be called in a controller with the <dfn>render_head(<var>[config array]</var>)</dfn> like so:</p>
+
+<code>
+	$this->head->render_head();
+</code>
+
+<h3>Output</h3>
+
+<p>The head library can used into two ways. By default, a constant called <var>HEAD</var> is defined that can be called in a view or controller. The name of the defined constant can be changed using a config variable called <var>constant_name</var>.</p>
+
+<code>
+	echo HEAD;
+</code>
+
+<p>However, the library can be set to have the <dfn>render_head()</dfn> function return a string.</p>
+
+<code>
+$data['head'] = render_head();
+</code>
+
+<p>This config item is called <var>output_string</var>.</p>
+
+<h2 id="config">Configuration</h2>
+
+<p>The head library has a range of available configuration options. Class variables are set to default values, and can be overridden by a head array config in the <dfn>config/head.php</dfn> file.</p>
+
+<p>The main <dfn>render_head()</dfn> function accepts a config array.</p>
+
+<code>
+	$config['title'] = "Test Page";<br />
+	$config['debug'] = TRUE;<br />
+	<br />
+	$this->head->render_head($config);<br />
+</code>
+
+<p>Values can also be set individually.</p>
+
+<code>
+	$this->head->title = "Test Page";<br />
+	<br />
+	$this->head->render_head($config);<br />
+</code>
+
+<p>Below is a table of available configuration variables.</p>
+
+<table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
+<tr>
+	<th>Preference</th>
+	<th>Default&nbsp;Value</th>
+	<th>Options</th>
+	<th>Description</th>
+</tr>
+<tr>
+	<td class="td"><strong>show_errors</strong></td>
+	<td class="td">TRUE</td>
+	<td class="td">bool</td>
+	<td class="td">Show errors if encountered</td>
+</tr>
+<tr>
+	<td class="td"><strong>debug</strong></td>
+	<td class="td">FALSE</td>
+	<td class="td">bool</td>
+	<td class="td">If set to TRUE, will check to see if all linked files in the head document exist, and will display and error message listing files not found, regardless of the setting of show_errors</td>
+</tr>
+<tr>
+	<td class="td"><strong>output_string</strong></td>
+	<td class="td">FALSE</td>
+	<td class="td">bool</td>
+	<td class="td">Whether or not to output a string rather than defining a constant for ouput</td>
+</tr>
+<tr>
+	<td class="td"><strong>constant_name</strong></td>
+	<td class="td">HEAD</td>
+	<td class="td">string</td>
+	<td class="td">Name of the constant string if applicable</td>
+</tr>
+
+<tr>
+	<td class="td"><strong>js_location</strong></td>
+	<td class="td">js/</td>
+	<td class="td">string</td>
+	<td class="td">Location of javascript files</td>
+</tr>
+<tr>
+	<td class="td"><strong>css_location</strong></td>
+	<td class="td">css/</td>
+	<td class="td">string</td>
+	<td class="td">Location of css files</td>
+</tr>
+<tr>
+	<td class="td"><strong>doctype</strong></td>
+	<td class="td">xhtml1-strict</td>
+	<td class="td">See CodeIgniter list of available doctypes</td>
+	<td class="td">Doctype to include</td>
+</tr>
+<tr>
+	<td class="td"><strong>use_base</strong></td>
+	<td class="td">FALSE</td>
+	<td class="td">bool</td>
+	<td class="td">Whether or not to include the base tag</td>
+</tr>
+<tr>
+	<td class="td"><strong>base_target</strong></td>
+	<td class="td">NULL</td>
+	<td class="td">_blank, _parent, _self, _top, framename</td>
+	<td class="td">Optional target attribute for base tag</td>
+</tr>
+<tr>
+	<td class="td"><strong>base_ref</strong></td>
+	<td class="td">base_url config value</td>
+	<td class="td">string</td>
+	<td class="td">Value for url for base tag</td>
+</tr>
+<tr>
+	<td class="td"><strong>site_title</strong></td>
+	<td class="td">NULL</td>
+	<td class="td">string</td>
+	<td class="td">Title of the site</td>
+</tr>
+<tr>
+	<td class="td"><strong>title</strong></td>
+	<td class="td">NULL</td>
+	<td class="td">string</td>
+	<td class="td">Page title</td>
+</tr>
+<tr>
+	<td class="td"><strong>title_append</strong></td>
+	<td class="td">TRUE</td>
+	<td class="td">bool</td>
+	<td class="td">Whether or not to append the page title to the site title</td>
+</tr>
+<tr>
+	<td class="td"><strong>title_append_str</strong></td>
+	<td class="td">-</td>
+	<td class="td">string</td>
+	<td class="td">String to separate the site title and the page title if using the append function</td>
+</tr>
+<tr>
+	<td class="td"><strong>use_meta</strong></td>
+	<td class="td">TRUE</td>
+	<td class="td">bool</td>
+	<td class="td">Whether or not we want to use the meta data at all</td>
+</tr>
+<tr>
+	<td class="td"><strong>meta_content</strong></td>
+	<td class="td">text/html; charset=utf-8</td>
+	<td class="td">string</td>
+	<td class="td">Meta content value. Set value to false if you want to leave this out</td>
+</tr>
+<tr>
+	<td class="td"><strong>meta_language</strong></td>
+	<td class="td">en</td>
+	<td class="td">string</td>
+	<td class="td">Meta language value. Set value to false if you want to leave this out</td>
+</tr>
+<tr>
+	<td class="td"><strong>meta_author</strong></td>
+	<td class="td">NULL</td>
+	<td class="td">string</td>
+	<td class="td">Meta author value. Set value to false if you want to leave this out</td>
+</tr>
+<tr>
+	<td class="td"><strong>meta_description</strong></td>
+	<td class="td">NULL</td>
+	<td class="td">string</td>
+	<td class="td">Meta description value. Set value to false if you want to leave this out</td>
+</tr>
+<tr>
+	<td class="td"><strong>meta_keywords</strong></td>
+	<td class="td">NULL</td>
+	<td class="td">string</td>
+	<td class="td">Meta keywords value. Set value to false if you want to leave this out</td>
+</tr>
+<tr>
+	<td class="td"><strong>use_favicon</strong></td>
+	<td class="td">TRUE</td>
+	<td class="td">bool</td>
+	<td class="td">Whether or not to use a favicon</td>
+</tr>
+<tr>
+	<td class="td"><strong>favicon_location </strong></td>
+	<td class="td">images/favicon.ico</td>
+	<td class="td">string</td>
+	<td class="td">Location of favicon</td>
+</tr>
+<tr>
+	<td class="td"><strong>packs</strong></td>
+	<td class="td">NULL</td>
+	<td class="td">array</td>
+	<td class="td">Packages to be loaded</td>
+</tr>
+<tr>
+	<td class="td"><strong>jquery_file</strong></td>
+	<td class="td">jquery.js</td>
+	<td class="td">string</td>
+	<td class="td">Name of the jquery file if it needs to be loaded</td>
+</tr>
+
+</table>
+
+<h2 id="doctype">Doctypes</h2>
+
+<p>Doctypes are created using the <dfn>doctype()</dfn> function from the Code Igniter native html helper. If a doctype is selected that is not supported, an error message will be generated if errors are allowed.</p>
+
+<h2 id="base">Base URLs</h2>
+
+<p>Although not necessary for some doctypes, the head library has the ability to generate a base tag from the configuration values listed above. More information on the base tag can be found <a href="http://www.w3schools.com/TAGS/tag_base.asp">here</a>.</p>
+
+<p>A great overview of how the base tag is useful for CI organization can be found <a href="http://philsturgeon.co.uk/news/2009/09/Asset-handling-in-CodeIgniter-with-the-BASE-tag">here</a>.</p>
+
+<h2 id="favicon">Favicon</h2>
+
+<p>A favicon can be created using the above configuration options. In debug mode, the class checks to see if the favicon file exists.</p>
+
+<h2 id="meta">Meta Data</h2>
+
+<p>By default, five meta data options are handled individually and can have default values set through a config file or set individually. These options are:</p>
+
+<ul>
+	<li>Content type</li>
+	<li>Content language</li>
+	<li>Author</li>
+	<li>Description</li>
+	<li>Keywords</li>
+</ul>
+
+<p><h3>$this->head->add_meta(<var>name</var>, <var>value</var>, <var>[equiv or name]</var>)</h3></p>
+
+<p>Additional meta tags can be added through the <dfn>add meta</dfn> function. This function uses the <dfn>meta</dfn> function from the Code Igniter native html class. The third passed variable option and determines whether the meta data is handled with a name or http-equiv attribute and defaults to name.</p>
+
+<code>
+	$this->head->add_meta('robots', 'no-cache');
+</code>
+
+<h2 id="links">CSS and Javascript</h2>
+
+<p>There are several ways to add CSS and Javascript to the head tag, both as inline code and linked files.</p>
+
+<h3>Loading CSS and JS Automatically</h3>
+
+<p>If you have CSS and JS that loads on each page, they can be added to the config file as an array called <var>defaults</var>. As with all CSS and Javascript loads, the head library will determine what kind of file it is and create the appropriate link. File paths are also allowed.</p>
+
+<code>
+$config['defaults'] = array('master.css', 'tinymce/tinymce.js');
+</code>
+
+<h3>Loading CSS and JS Individually</h3>
+
+<p>CSS and JS can be added individually with the <dfn>add_css(<var>file</var>, <var>[media]</var>)</dfn> and <dfn>add_js(<var>file</var>)</dfn> functions. The <dfn>add_css</dfn> function accepts a second parameter for the media type which defaults to "all".</p>
+
+<code>
+	$this->head->add_css('reset.css');<br />
+	$this->head->add_css('print.css', 'print');<br />
+	$this->head->add_js('accordian.js');
+</code>
+
+<h3>Inline CSS and JS</h3>
+
+<p>You can add inline code to the head document with the <dfn>add_inline(<var>code</var>, <var>css_or_js</var>)</dfn> function. This function requires a second parameter that defines whether the code is CSS or Javascript and displays it accordingly.</p>
+
+<code>
+	$this->head->add_inline('* {font-family: Arial;}', 'css');
+</code>
+
+<p>A fourth way to load JS and CSS is through the packages feature, which is covered in the next section.</p>
+
+<h2 id="packages">Packages</h2>
+
+<p>Often times, pages require a number of CSS and JS files that need to be loaded in order for a certain function to work correctly. For example, the jQuery <a href="http://jqueryfordesigners.com/demo/coda-slider.html">Coda Slider</a> requires five Javascript files and a CSS file. The head library offers an easy way to accomplish this by creating named "packages" that specify what files should be loaded. These packages reduce the amount of code needed to determine what files need to be called.</p>
+
+<p>Packages can be defined in the config file by adding on to a variable called <var>$config['packages']</var>. Here is an example of a package for the jQuery Coda Slider.</p>
+
+<code>
+ $config['packages']['coda_slider'] = array(<br />
+		'coda-slider.css',<br />
+ 		'jquery.js',<br />
+ 		'jquery.scrollTo.js',<br />
+ 		'jquery.localscroll.js',<br />
+ 		'jquery.serialScroll.js',<br />
+ 		'coda-slider.js');<br />
+</code>
+
+<p>Now that the package is defined, all you have to do is tell the head library to load the package. You can do this by adding it through the <dfn>include_packages(<var>packages</var>)</dfn> function or by including them in the config array through a variable called <var>$packs</var>.</p>
+
+<p>In the case of loading more than one package, separate the names with a "|" character.</p>
+
+<code>
+$this->head->include_packages('coda_slider|accordian');
+</code>
+
+<p class="important"><strong>Note:</strong>&nbsp; If multiple packages reference the same resource, that resource will only be loaded once.</p>
+
+<h2 id="jquery">JQuery</h2>
+
+<p>The head library also has some special support for JQuery.</p>
+
+<h3>$this->head->add_jquery(<var>jquery code</var>);</h3>
+
+<p>The <dfn>add_jquery</dfn> function allows you to add a line or block of JQuery code that is rendered in the head with the <dfn>$(document).ready</dfn> function.</p>
+
+<p>For example, this:</p>
+
+<code>
+	$this->head->add_jquery("$(#slide_down_div).slideDown('slow');");
+</code>
+
+<p>Results in this:</p>
+
+<code>
+&lt;script type=&quot;text/javascript&quot; language=&quot;javascript&quot;&gt;<br />
+	        // &lt;![CDATA[&lt;br/&gt;<br />
+	        $(document).ready(function(){<br />
+	          $(#slide_down_div).slideDown('slow');<br />
+	      	});<br />
+	        	// ]]&gt;<br />
+	      	&lt;/script&gt;<br />
+</code>
+
+<p>You can add as many blocks of JQuery text as you'd like.</p>
+
+<p>Since JQuery likes to be loaded first, it'll find out if its being loaded in any packages or if there is JQuery code added to the page, and load the JQuery file first. Dont' forget to name your JQuery file using the <var>jquery_file</var> config variable so the library knows what your JQuery file is called.</p>
+
+<h2 id="misc">Misc</h2>
+
+<p>Sometimes you might want to put some random stuff in the head of your document. You can do that with the <dfn>add_misc(<var>code</var>)</dfn> function. Add as many misc items as you want, and they will all be placed in the head of the document.</p>
+
+<h2 id="feeds">Feeds</h2>
+
+<p>RSS and Atom feeds can be added easily to head documents with the <dfn>add_feed(<var>file</var>, <var>title</var>, <var>[rss or atom]</var>)</dfn> function. The optional third parameter determines if the feed is listed as RSS or Atom with RSS as the default value.</p>
+
+<code>
+		$this->head->add_feed('http://www.example.com/news.xml', 'Site News');<br />
+		$this->head->add_feed('http://www.example.com/events.xml', 'Site Events', 'atom');
+</code>
+
+<p class="important"><strong>Note:</strong>&nbsp; The URLs for the add_feed function should be full URLs.</p>
+
+<h2 id="debug">Debugging</h2>
+
+<p>Many times, its useful to be able to quickly check if all the resources you are loading actually exist. For example, you could be trying to figure out why a Javascript function isn't working, and rather than looking into the head and figuring out if any of the links are wrong, you can just tell the head library to check for you. If you don't have something like an in-browser error console or another similar tool, this could come in handy.</p>
+
+<p>Debugging is set to <var>FALSE</var> by default, but set it to <var>TRUE</var> to turn it on. If there are problems, it will let you know in the form of a CodeIgniter error message.</p>
+
+<p>The head debugger checks for:</p>
+
+<ul>
+	<li>CSS Files</li>
+	<li>JS Files</li>
+	<li>Favicon Files</li>
+</ul>
+
+<code>
+	$this->head->debug = TRUE;
+</code>
+
+<code>
+The following errors were encountered in the head area:<br />
+<br />
+master.css not found<br />
+coda-slider.css not found<br />
+</code>
+
+<p class="important"><strong>Note:</strong>&nbsp; The debug feature checks for the actual file, so if you are loading resources that aren't files (like a CSS function that is routed through the CI architecture), then this won't help you.</p>
+
+<h2 id="version">Version History</h2>
+
+<h3>1.0 - October 30, 2009</h3>
+
+<ul>
+	<li>Ability to add</li>
+	<ul>
+		<li>Packages</li>
+		<li>JS/CSS</li>
+		<li>Feeds</li>
+		<li>Doctype</li>
+		<li>Favicon</li>
+		<li>Base</li>
+		<li>Meta Data</li>
+	</ul>
+	<li>Debugging Feature</li>
+	<li>Special JQuery support</li>
+</ul>
+
+<h3>Future Features</h3>
+
+<ul>
+	<li>Ability to set media type for css on packages</li>
+	<li>Packages that load by default</li>
+</ul>
+
+</div>
+<!-- END CONTENT -->
+
+<div id="footer">
+<p>
+Previous Topic:&nbsp;&nbsp;<a href="#">Previous Class</a>
+&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Next Topic:&nbsp;&nbsp;<a href="#">Next Class</a>
+</p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+</div>
+
+</body>
+</html>
