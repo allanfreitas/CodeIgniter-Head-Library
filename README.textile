@@ -1,0 +1,18 @@
+h1. CodeIgniter Head Library
+
+The Head Library is a CodeIgniter library that allows for an unobtrusive way to create the
+
+<head>
+</head>
+
+tags for a page from the controller using both dynamic info and site-wide configurations. The Head Library allows you to build up your head content as you go along, adding in CSS, JS, and anything else you can think of along the way. You can add items in the constructor, or by default in a config file. Before you load your page, just call the render_head function and the head tag content is generated.
+
+This Head Library comes with support for packages of items for easy loading, as well as special considerations for jQuery.
+
+h2. Author
+
+* "Adam Fairholm":http://twitter.com/adamfairholm
+
+h2. Documentation
+
+Full documentation is included with the download, and can also be found online "here":http://docs.adamfairholm.com/codeigniter-head-library/.
