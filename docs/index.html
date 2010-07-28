@@ -56,6 +56,7 @@
 	<li><a href="#config">Configuration</a></li>
 	<li><a href="#doctype">Doctypes</a></li>
 	<li><a href="#base">Base URLs</a></li>
+	<li><a href="#ga">Google Analytics</a></li>
 	<li><a href="#favicon">Favicon</a></li>
 	<li><a href="#meta">Meta Data</a></li>
 	<li><a href="#links">CSS and Javascript</a></li>
@@ -270,6 +271,13 @@ $data['head'] = render_head();
 	<td class="td">string</td>
 	<td class="td">Name of the jquery file if it needs to be loaded</td>
 </tr>
+<tr>
+	<td class="td"><strong>ga_tracking_id</strong></td>
+	<td class="td">NULL</td>
+	<td class="td">string</td>
+	<td class="td">Your Google Analytics tracking ID</td>
+</tr>
+
 
 </table>
 
@@ -282,6 +290,10 @@ $data['head'] = render_head();
 <p>Although not necessary for some doctypes, the head library has the ability to generate a base tag from the configuration values listed above. More information on the base tag can be found <a href="http://www.w3schools.com/TAGS/tag_base.asp">here</a>.</p>
 
 <p>A great overview of how the base tag is useful for CI organization can be found <a href="http://philsturgeon.co.uk/news/2009/09/Asset-handling-in-CodeIgniter-with-the-BASE-tag">here</a>.</p>
+
+<h2 id="ga">Google Analytics</h2>
+
+<p>Google Analytics now requires tracking code to be placed before closing head tag, not the closing body tag as in past versions. You can automatically add this code in the correct place by providing your Google Analytics tracking ID via the variable <var>ga_tracking_id</var>.</p>
 
 <h2 id="favicon">Favicon</h2>
 
