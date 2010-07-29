@@ -384,6 +384,14 @@ $this->head->include_packages('coda_slider|accordian');
 
 <p class="important"><strong>Note:</strong>&nbsp; If multiple packages reference the same resource, that resource will only be loaded once.</p>
 
+<h3>Loading Packages by Default</h3>
+
+<p>You can load packages by default by adding a <var>packages</var> array node to the <var>defaults</var> array.</p>
+
+<code>
+$config['defaults']['packages'] = array('coda_slider');
+</code>
+
 <h2 id="jquery">JQuery</h2>
 
 <p>The head library also has some special support for JQuery.</p>

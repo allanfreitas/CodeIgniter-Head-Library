@@ -22,6 +22,8 @@
  */
  
  $config['defaults'] = array('master.css', 'tinymce/tinymce.js');
+ 
+ $config['defaults']['packages'] = array('coda_slider');
 
  /**
  * Packages

@@ -137,6 +137,10 @@ class Head
 		{
 			$html .= $this->render_favicon();
 		}
+
+    	$html .= $this->include_default_packages();
+    	
+    	array_unique($this->packs);
 		
 		$this->process_packages();
 		
@@ -152,7 +156,9 @@ class Head
 		}
 		
 		$html .= $this->render_items("js");
+		
     	$html .= $this->render_jquery();
+    	
 		
 		if(count($this->feeds) > 0)
 		{
@@ -454,14 +460,37 @@ class Head
 	}
 	
 	/**
+	 * Include default packages
+	 */
+	function include_default_packages()
+	{
+		foreach( $this->defaults['packages'] as $def_package )
+		{
+			//Check and see if it exists
+			if( ! array_key_exists($def_package, $this->packages) )
+			{
+				$this->handle_error("Package '".$def_package."' is not supported");
+			}
+			else
+			{
+				$this->packs[] = $def_package;
+			}
+		}
+	}
+	
+	/**
 	 * Process the packages from the config file
 	 * 
 	 * @return 	void
 	 */
 	function process_packages()
 	{
+		//Clean packages
+		$defaults = $this->defaults;
+		unset($defaults['packages']);
+	
 		//First, go through the defaults.
-		foreach($this->defaults as $def_file)
+		foreach($defaults as $def_file)
 		{
 			$this->process_file($def_file);
 		}
