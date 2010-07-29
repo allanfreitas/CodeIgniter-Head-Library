@@ -69,6 +69,8 @@ class Head
   	
   	var $jquery_file				= "jquery.js";					//Name of JQuery file. You know the people like to make 'em crazy
 
+	// --------------------------------------------------------------------------
+	
 	function Head( $config = array() )
 	{
 		$this->CI =& get_instance();
@@ -87,6 +89,8 @@ class Head
 			$this->initialize($config);
 		}
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Initialize Configs
@@ -101,6 +105,8 @@ class Head
 			$this->$key = $var;
 		}
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Render Head <head></head>
@@ -201,6 +207,8 @@ class Head
 		else
 			define($this->constant_name, $html);
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Render Doctype
@@ -225,6 +233,8 @@ class Head
 		
 	}
 
+	// --------------------------------------------------------------------------
+
 	/**
 	 * Render the html opening tag
 	 * 
@@ -241,6 +251,8 @@ class Head
 			return '<html>';
 		}
 	}
+
+	// --------------------------------------------------------------------------
 
 	/**
 	 * Render the base tag
@@ -267,6 +279,8 @@ class Head
 	
 		return $out .= ' />'.$this->bump();
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Render the title tag
@@ -284,6 +298,8 @@ class Head
 		
 		return $out.= $this->title.'</title>'.$this->bump();
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Render Google Analytics tracking code
@@ -314,6 +330,8 @@ class Head
 		
 		return null;
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Render metadata
@@ -361,6 +379,8 @@ class Head
 
 		return $out .= $this->bump(FALSE);
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Add a meta item
@@ -376,6 +396,8 @@ class Head
 	{
 		$this->meta[] = meta($name, $content, $name_or_equv);
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Render Favicon
@@ -386,6 +408,8 @@ class Head
 	{
 		return '<link rel="shortcut icon" href="'.$this->base_url.$this->favicon_location.'" />'.$this->bump();
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Render the CSS and JS
@@ -403,6 +427,8 @@ class Head
 		
 		return $out.$this->bump(FALSE);
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Add misc
@@ -416,6 +442,8 @@ class Head
 	{
 		$this->misc[] = $code;
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Render the misc items
@@ -434,6 +462,8 @@ class Head
 		
 		return $out;
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Include a package in the mix
@@ -458,6 +488,8 @@ class Head
 			}
 		}
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Include default packages
@@ -477,6 +509,8 @@ class Head
 			}
 		}
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Process the packages from the config file
@@ -508,6 +542,8 @@ class Head
 		$this->css 	= array_unique($this->css);
 		$this->js 	= array_unique($this->js);
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Takes a filename and determines if it is a css or js, and then takes
@@ -535,6 +571,8 @@ class Head
 			$this->handle_error("Unable to process unknown file type: ".$filename);
 		}
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Add a CSS file link tag
@@ -547,6 +585,8 @@ class Head
 	{
 		$this->css[$file] = '<link href="'.$this->base_url.$this->css_location.$file.'" rel="stylesheet" media="'.$media.'" type="text/css" />';
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Add a JS file link tag
@@ -559,6 +599,8 @@ class Head
 		$this->js[$file] = '<script type="text/javascript" src="'.$this->base_url.$this->js_location.$file.'"></script>';
 	}
 
+	// --------------------------------------------------------------------------
+
 	/**
 	 * Add some JQuery code
 	 *
@@ -569,6 +611,8 @@ class Head
 	{
 		$this->jquery[] = $code;
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Add some inline CSS code or JS code
@@ -595,6 +639,8 @@ class Head
 			</script>';
 		} 
 	}
+
+	// --------------------------------------------------------------------------
 
 	/**
 	 * Render JQuery
@@ -630,6 +676,8 @@ class Head
 	    	return '';
 	    }
 	}
+
+	// --------------------------------------------------------------------------
 	  
 	/**
 	 * Add RSS or Atom feed link
@@ -645,6 +693,8 @@ class Head
 		$this->feeds[] = '<link href="'.$feed.'" type="application/'.$rss_or_atom.'+xml" rel="alternate" title="'.$name.'" />';
 	}
 	
+	// --------------------------------------------------------------------------
+
 	/**
 	 * Checks the doctype and makes sure the stuff needed in the head is there
 	 *
@@ -686,6 +736,8 @@ class Head
 			show_error("The following errors were encountered in the head area: <ul>".$errors."</ul>");
 		}
 	}	
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Handles our error and sees if we want to keep quiet or not
@@ -699,6 +751,8 @@ class Head
 		if($this->show_errors)
 			show_error($msg);
 	}
+
+	// --------------------------------------------------------------------------
 	
 	/**
 	 * Provides the bump so we can still have nice and pretty head spacing
