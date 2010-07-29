@@ -59,6 +59,7 @@ class Head
 	
 	var $ga_tracking_id				= '';							//Google Analytics Tracking Code
 	
+	var $defaults					= array();
 	var $css						= array();
 	var $js							= array();
 	var $inline						= array();
@@ -68,7 +69,7 @@ class Head
   	
   	var $jquery_file				= "jquery.js";					//Name of JQuery file. You know the people like to make 'em crazy
 
-	function Head()
+	function Head( $config = array() )
 	{
 		$this->CI =& get_instance();
 	
@@ -80,12 +81,7 @@ class Head
 		$this->base_url		= base_url();
 		$this->link_url 	= site_url();
 		
-		// Load config file variables
-		// First get the config array from the config file raw dog
-		// Then initialize the passed config values in the render function
-		
-		include('./'.APPPATH.'config/head.php');
-						
+		//Initialize the configs
 		if(count($config) > 0)
 		{
 			$this->initialize($config);
